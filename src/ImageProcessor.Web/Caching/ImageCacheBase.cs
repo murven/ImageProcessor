@@ -353,10 +353,13 @@ namespace ImageProcessor.Web.Caching
             /// <inheritdoc />
             public void Stop(bool immediate)
             {
-                //Stop the timer
-                this.timer.Change(Timeout.Infinite, Timeout.Infinite);
-                this.timer.Dispose();
-                this.timer = null;
+                if (timer != null)
+                {
+                    //Stop the timer
+                    timer.Change(Timeout.Infinite, Timeout.Infinite);
+                    timer.Dispose();
+                    timer = null;
+                }
 
                 if (!tokenSource.IsCancellationRequested)
                 {
